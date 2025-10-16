@@ -18,7 +18,7 @@ app.post("/webhook",webhookController.webhookMessege);
 
 
 
-app.get("/health", (req, res) => {
+app.get("/health", (req, res) => { 
   res.send("Hello World!");
 });
 
