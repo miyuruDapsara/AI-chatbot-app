@@ -1,18 +1,15 @@
 import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
-const PORT = process.env.PORT || "3000";
-const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID ;
-const VERSION = process.env.VERSION ;
-const WHATSAPP_USER_ACCESS_TOKEN = process.env.WHATSAPP_USER_ACCESS_TOKEN ;
-const WEBHOOK_VERIFICATION_PASSWORD = process.env.WEBHOOK_VERIFICATION_KEY; ;
-
+console.log("✅ Loaded .env variables:");
 
 export const APP_CONFIG = {
-  PORT,
-  PHONE_NUMBER_ID,
-  VERSION,
-  WEBHOOK_VERIFICATION_PASSWORD,
-  WHATSAPP_USER_ACCESS_TOKEN,
+  PORT: process.env.PORT || "3000",
+  PHONE_NUMBER_ID: process.env.PHONE_NUMBER_ID || "",
+  VERSION: process.env.VERSION || "v19.0",
+  WHATSAPP_USER_ACCESS_TOKEN: process.env.WHATSAPP_USER_ACCESS_TOKEN || "",
+  WEBHOOK_VERIFICATION_PASSWORD:
+    process.env.WEBHOOK_VERIFICATION_PASSWORD || "",
 };

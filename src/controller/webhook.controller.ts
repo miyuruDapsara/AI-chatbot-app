@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { WebhookService } from "../service/webhook.service";
 import { WebhookMessageDto } from "../dto/webhookVerification.dto";
+import { APP_CONFIG } from "../config/app.config";
+
 
 export class WebhookController {
   private webhookService: WebhookService;
@@ -13,6 +15,7 @@ export class WebhookController {
     const mode = req.query["hub.mode"] as string;
     const verify_token = req.query["hub.verify_token"] as string;
     const challenge = req.query["hub.challenge"] as string;
+
 
     const data = {
       mode,
@@ -27,17 +30,21 @@ export class WebhookController {
       return;
     }
     res.send("Error! , wrong code..");
-  };
+  }; 
 
   webhookMessege = async (req: Request, res: Response) => {
+    //console.log(JSON.stringify(req.body));
     const data = req.body as WebhookMessageDto;
 
-    const message = data.entry[0].changes[0].value.messages[0].text.body;
-    const phoneNumber = data.entry[0].changes[0].value.metadata.phone_number_id;
-    const from = data.entry[0].changes[0].value.messages[0].from;
-    const name = data.entry[0].changes[0].value.contact[0].profile.name;
+   
+   const isReplied = await this.webhookService.handleReceiveMessage(data);
+   if (isReplied) {
+      res.status(200).send("Message sent successfully");
+   } else {
+      res.status(500).send("Error sending message");
+   }
 
-    console.log(message + phoneNumber + from + name);
+
   };
 }
 

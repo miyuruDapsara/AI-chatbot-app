@@ -8,13 +8,13 @@ export class MessageController{
   async sendMessage(req: Request, res: Response) {
     const{phoneNumber,message} =req.body;
   let data = JSON.stringify({
-    messaging_product: "whatsapp",
-    recipient_type: "individual",
+    messaging_product:"whatsapp",
+    recipient_type:"individual",
     to: `${phoneNumber}`,
     type: "text",
     text: {
-      preview_url: false,
-      body: message,
+      preview_url:false,
+      body:message,
     },
   });
 
@@ -26,7 +26,7 @@ export class MessageController{
       "Content-Type": "application/json",
       Authorization: `Bearer ${APP_CONFIG.WHATSAPP_USER_ACCESS_TOKEN}`,
     },
-    data: data,
+    data:data,
   };
 
   await axios
