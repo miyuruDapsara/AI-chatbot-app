@@ -46,7 +46,24 @@ export interface WebhookMessageDto {
             errors: [{
 
             }],
-            statuses: [{}]
+            statuses: [{
+              id: string;
+              status: string;
+              timestamp: string;
+              recipient_id: string;
+              conversation: {
+                id: string;
+                origin:{
+                  type:string;
+                }
+              },
+              pricing:{
+                billable:boolean;
+                pricing_model:string;
+                category:string;
+                type:string
+              }
+            }]
           };
 
           field: string;

@@ -1,8 +1,11 @@
 import axios from "axios";
 import { APP_CONFIG } from "../config/app.config";
 
+
 export class MessageService {
   private static instance: MessageService;
+
+
 
   public static getInstance(): MessageService {
     if (!MessageService.instance) {
@@ -13,7 +16,9 @@ export class MessageService {
 
 
   
-  private constructor() {}
+  private constructor() {
+
+  }
 
 
 
@@ -43,6 +48,8 @@ export class MessageService {
     try {
       const response = await axios.request(config);
       if (response.status !== 200) {
+        console.log('reply send to :',phoneNumber);
+        
         return true;
       }
     } catch (error) {

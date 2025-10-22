@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { WebhookService } from "../service/webhook.service";
 import { WebhookMessageDto } from "../dto/webhookVerification.dto";
-import { APP_CONFIG } from "../config/app.config";
+
 
 
 export class WebhookController {

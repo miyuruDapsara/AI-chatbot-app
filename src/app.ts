@@ -2,6 +2,7 @@ import { APP_CONFIG } from './config/app.config';
 import express from "express";
 import { MessageController } from './controller/message.controller';
 import { WebhookController } from './controller/webhook.controller';
+import mongoose from 'mongoose';
 
 
 const app = express();
@@ -23,6 +24,14 @@ app.get("/health", (req, res) => {
 });
 
 
-app.listen(APP_CONFIG.PORT, () => {
-  console.log(`Server is running on port : ${APP_CONFIG.PORT}`);
-});
+mongoose.connect(APP_CONFIG.MONGO_URI).then(()=>{
+  console.log('connected to mongodb');
+  app.listen(APP_CONFIG.PORT, () => {
+    console.log(`Server is running on port : ${APP_CONFIG.PORT}`);
+  });
+  
+}).catch((err)=>{
+  console.log(err);
+})
+
+
